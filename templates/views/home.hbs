@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/home.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="topnav" id="myTopnav">
+    <a href="#" class="active"><b>B.</b></a>
+    <a href="#let">About us</a>
+    <a href="/subs">Subscriptions</a>
+    <a href="/login">Sign in</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+  <script>
+    /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+  </script>
+  <div class="slider">
+    <div class="slides">
+      <!--radio buttons start-->
+      <input type="radio" name="radio-btn" id="radio1">
+      <input type="radio" name="radio-btn" id="radio2">
+      <input type="radio" name="radio-btn" id="radio3">
+      <input type="radio" name="radio-btn" id="radio4">
+      <!--radio buttons end-->
+      <!--slide images start-->
+      <div class="slide first">
+        <img src="https://offtheshelf.com/app/uploads/2019/12/20-authors-2020_soc.jpg" alt="">
+      </div>
+      <div class="slide">
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/58fd82dbbf629ab224f81b68/1591857595709-KWCVGOGROWWWS0P6TINO/Japanese-Books.jpg"
+          alt="">
+      </div>
+      <div class="slide">
+        <img
+          src="https://imagesvc.meredithcorp.io/v3/mm/image?q=85&c=sc&poi=face&w=2000&h=1000&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2018%2F08%2Fbooks-adaptations-2000.jpg"
+          alt="">
+      </div>
+      <div class="slide">
+        <img src="/images/carousel_img.png" alt="">
+      </div>
+      <!--slide images end-->
+      <!--automatic navigation start-->
+      <div class="navigation-auto">
+        <div class="auto-btn1"></div>
+        <div class="auto-btn2"></div>
+        <div class="auto-btn3"></div>
+        <div class="auto-btn4"></div>
+      </div>
+      <!--automatic navigation end-->
+    </div>
+    <!--manual navigation start-->
+    <div class="navigation-manual">
+      <label for="radio1" class="manual-btn"></label>
+      <label for="radio2" class="manual-btn"></label>
+      <label for="radio3" class="manual-btn"></label>
+      <label for="radio4" class="manual-btn"></label>
+    </div>
+    <!--manual navigation end-->
+  </div>
+  <!--image slider end-->
+  <script type="text/javascript">
+    var counter = 1;
+    setInterval(function () {
+      document.getElementById('radio' + counter).checked = true;
+      counter++;
+      if (counter > 4) {
+        counter = 1;
+      }
+    }, 3000);
+  </script>
+  <div id="caro">
+    <h2>WHERE <br> BOOKS <br> AND <br> PEOPLE <br> MEET</h2>
+  </div>
+  <div id="let">
+    <h3>Let The Book Talk</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+  </div>
+  <section>
+    <div class="slider">
+      <div class="slides">
+        <!--radio buttons start-->
+        {{!-- <input type="radio" name="radio-btn" id="radio1">
+        <input type="radio" name="radio-btn" id="radio2">
+        <input type="radio" name="radio-btn" id="radio3">
+        <input type="radio" name="radio-btn" id="radio4"> --}}
+        <!--radio buttons end-->
+        <!--slide images start-->
+        <div class="slide first">
+          <img src="images/about_us.JPG" alt="">
+        </div>
+        <div class="slide">
+          <img src="images/about_us.JPG" alt="">
+        </div>
+        <div class="slide">
+          <img src="images/about_us.JPG" alt="">
+        </div>
+        <div class="slide">
+          <img src="images/about_us.JPG" alt="">
+        </div>
+        <!--slide images end-->
+        {{!--
+        <!--automatic navigation start-->
+        <div class="navigation-auto">
+          <div class="auto-btn1"></div>
+          <div class="auto-btn2"></div>
+          <div class="auto-btn3"></div>
+          <div class="auto-btn4"></div>
+        </div>
+        <!--automatic navigation end-->
+      </div>
+      <!--manual navigation start-->
+      <div class="navigation-manual">
+        <label for="radio1" class="manual-btn"></label>
+        <label for="radio2" class="manual-btn"></label>
+        <label for="radio3" class="manual-btn"></label>
+        <label for="radio4" class="manual-btn"></label> --}}
+      </div>
+      <!--manual navigation end-->
+    </div>
+    <!--image slider end-->
+  </section>
+  {{!--
+  <script type="text/javascript">
+    var counter = 1;
+    setInterval(function () {
+      document.getElementById('radio' + counter).checked = true;
+      counter++;
+      if (counter > 4) {
+        counter = 1;
+      }
+    }, 3000);
+  </script> --}}
+  <footer>
+    <div class="content">
+      <div class="top">
+        <div class="logo-details">
+          <i class="fab fa-slack"></i>
+          <span class="logo_name">BambooStudios</span>
+        </div>
+        <div class="media-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-pinterest"></i></a>
+        </div>
+      </div>
+      <div class="link-boxes">
+
+        <div id="contact">
+          Where stories live!
+
+          <div id="contactinfo">
+            <div>Read Stories, Publish original write-ups anytime on XYZ.
+              We connect a global community of millions of readers and writers through the power of story.</div>
+
+            <p>phone no. 7766247913 <br> email: abcd@123.com</p>
+          </div>
+        </div>
+
+        <ul class="box">
+          <li class="link_name">About</li>
+          <li><a href="#">Company & Team</a></li>
+          <li><a href="#">Our Partners</a></li>
+        </ul>
+        <ul class="box">
+          <li class="link_name">Services</li>
+          <li><a href="#">Purchase Book</a></li>
+          <li><a href="#">Shipping & Delivery</a></li>
+          <li><a href="#">Cancellation & Refund</a></li>
+
+        </ul>
+        <ul class="box input-box">
+          <li class="link_name">Help us to improve our website</li>
+          <li><input type="text" placeholder="Leave your feedback"></li>
+          <li><input type="button" value="Submit"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom-details">
+      <div class="bottom_text">
+        <span class="copyright_text">Copyright © 2021 <a href="#">BambooStudios.</a>All rights reserved</span>
+        <span class="policy_terms">
+          <a href="#">Privacy policy</a>
+          <a href="/condition">Terms & condition</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+  <link rel="stylesheet" href="css/dashboard.css">
+  <!-- <link rel="stylesheet" href="footer.css"> -->
+  <!-- Boxicons CDN Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="css/carousel.css">
+  <!-- <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-c-plus-plus icon'></i>
+      <div class="logo_name">B.</div>
+      <i class='bx bx-menu' id="btn"></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+        <i class='bx bx-search'></i>
+        <input type="text" placeholder="Search...">
+        <span class="tooltip">Search</span>
+      </li>
+      <li>
+        <a href="/dashboard">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">Dashboard</span>
+        </a>
+        <span class="tooltip">Dashboard</span>
+      </li>
+      <li>
+        <a href="/user/author">
+          <i class='bx bx-user'></i>
+          <span class="links_name">Become an Author</span>
+        </a>
+        <span class="tooltip">Author</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-book-reader'></i>
+          <span class="links_name cat">Category<i class='bx bxs-chevron-down arrow'></i></span>
+        </a>
+        <span class="tooltip">Category</span>
+      </li>
+      <li class="menu">
+        <a href="/user/novel">
+          <i class='bx bx-chast'></i>
+          <span class="links_name">Novels</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-chast'></i>
+          <span class="links_name">Comics</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-chast'></i>
+          <span class="links_name">Magazines</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-chat'></i>
+          <span class="links_name">Chat Section</span>
+        </a>
+        <span class="tooltip">Chat Section</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-cart-alt'></i>
+          <span class="links_name">Order</span>
+        </a>
+        <span class="tooltip">Order</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-heart'></i>
+          <span class="links_name">Saved</span>
+        </a>
+        <span class="tooltip">Saved</span>
+      </li>
+      <li class="profile">
+        <div class="profile-details">
+          <!-- <img src="profile.jpg" alt="profileImg"> -->
+          <div class="name_job">
+            <div class="name">Logout</div>
+            <div class="job">Back to Home Page</div>
+          </div>
+        </div>
+        <a href="/logout">
+          <i class='bx bx-log-out' id="log_out"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <section class="home-section">
+    <!-- <div class="text">Dashboard</div> -->
+    <!--image slider start-->
+    <div class="slider">
+      <div class="slides">
+        <!--radio buttons start-->
+        <input type="radio" name="radio-btn" id="radio1">
+        <input type="radio" name="radio-btn" id="radio2">
+        <input type="radio" name="radio-btn" id="radio3">
+        <input type="radio" name="radio-btn" id="radio4">
+        <!--radio buttons end-->
+        <!--slide images start-->
+        <div class="slide first">
+          <img src="https://offtheshelf.com/app/uploads/2019/12/20-authors-2020_soc.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img
+            src="https://imagesvc.meredithcorp.io/v3/mm/image?q=85&c=sc&poi=face&w=2000&h=1000&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2018%2F08%2Fbooks-adaptations-2000.jpg"
+            alt="">
+        </div>
+        <div class="slide">
+          <img src="/images/carousel_img.png" alt="">
+        </div>
+        <div class="slide">
+          <img src="https://offtheshelf.com/app/uploads/2019/12/20-authors-2020_soc.jpg" alt="">
+        </div>
+        <!--slide images end-->
+        <!--automatic navigation start-->
+        <div class="navigation-auto">
+          <div class="auto-btn1"></div>
+          <div class="auto-btn2"></div>
+          <div class="auto-btn3"></div>
+          <div class="auto-btn4"></div>
+        </div>
+        <!--automatic navigation end-->
+      </div>
+      <!--manual navigation start-->
+      <div class="navigation-manual">
+        <label for="radio1" class="manual-btn"></label>
+        <label for="radio2" class="manual-btn"></label>
+        <label for="radio3" class="manual-btn"></label>
+        <label for="radio4" class="manual-btn"></label>
+      </div>
+      <!--manual navigation end-->
+    </div>
+    <!--image slider end-->
+    <script type="text/javascript">
+      var counter = 1;
+      setInterval(function () {
+        document.getElementById('radio' + counter).checked = true;
+        counter++;
+        if (counter > 4) {
+          counter = 1;
+        }
+      }, 3000);
+    </script>
+    <div class="grid-titles">
+      <h2>Continue Reading</h2>
+    </div>
+    <div class="grid-container">
+      <div class="grid-item"><img src="/images/novel1.jpeg" alt="alt" srcset=""></div>
+      <div class="grid-item"><img src="/images/novel2.jpeg" alt="alt" srcset=""></div>
+      <div class="grid-item"><img src="/images/novel3.jpeg" alt="alt" srcset=""></div>
+      <div class="grid-item"><img src="/images/novel4.jpeg" alt="alt" srcset=""></div>
+    </div>
+    <div class="grid-titles">
+      <h2>Previously Read</h2>
+    </div>
+    <div class="grid-container">
+      <div class="grid-item"><img src="/images/novel2.jpeg" alt="alt" srcset=""></div>
+      <div class="grid-item"><img src="/images/novel1.jpeg" alt="alt" srcset=""></div>
+      <div class="grid-item"><img src="/images/novel4.jpeg" alt="alt" srcset=""></div>
+      <div class="grid-item"><img src="/images/novel3.jpeg" alt="alt" srcset=""></div>
+    </div>
+    <div class="grid-titles">
+      <h2>Trending</h2>
+    </div>
+    <div class="grid-container">
+      <div class="grid-item"><img src="/images/novel4.jpeg" alt="alt" srcset=""></div>
+      <div class="grid-item"><img src="/images/novel2.jpeg" alt="alt" srcset=""></div>
+      <div class="grid-item"><img src="/images/novel3.jpeg" alt="alt" srcset=""></div>
+      <div class="grid-item"><img src="/images/novel1.jpeg" alt="alt" srcset=""></div>
+    </div>
+    <div class="grid-titles">
+      <h2>You Might Also Like!</h2>
+    </div>
+    <div class="grid-container">
+      <div class="grid-item"><img src="/images/novel3.jpeg" alt="alt" srcset=""></div>
+      <div class="grid-item"><img src="/images/novel4.jpeg" alt="alt" srcset=""></div>
+      <div class="grid-item"><img src="/images/novel1.jpeg" alt="alt" srcset=""></div>
+      <div class="grid-item"><img src="/images/novel2.jpeg" alt="alt" srcset=""></div>
+    </div>
+    <footer>
+      <div class="content">
+        <div class="top">
+          <div class="logo-details">
+            <i class="fab fa-slack"></i>
+            <span class="logo_name">Bamboo Studios</span>
+          </div>
+          <div class="media-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="link-boxes">
+
+          <div id="contact">
+            Where stories live!
+
+            <div id="contactinfo">
+              <div>Read Stories, Publish original write-ups anytime on XYZ.
+                We connect a global community of millions of readers and writers through the power of story.</div>
+
+              <p>phone no. 7766247913 <br> email: abcd@123.com</p>
+            </div>
+          </div>
+
+          <ul class="box">
+            <li class="link_name">About</li>
+            <li><a href="#">Company & Team</a></li>
+            <li><a href="#">Our Partners</a></li>
+          </ul>
+          <ul class="box">
+            <li class="link_name">Services</li>
+            <li><a href="#">Purchase Book</a></li>
+            <li><a href="#">Shipping & Delivery</a></li>
+            <li><a href="#">Cancellation & Refund</a></li>
+
+          </ul>
+          <ul class="box input-box">
+            <li class="link_name">Help us to improve our website</li>
+            <li><input type="text" placeholder="Leave your feedback"></li>
+            <li><input type="button" value="Submit"></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom-details">
+        <div class="bottom_text">
+          <span class="copyright_text">Copyright © 2021 <a href="#">Bamboo Studios.</a>All rights reserved</span>
+          <span class="policy_terms">
+            <a href="#">Privacy policy</a>
+            <a href="#">Terms & condition</a>
+          </span>
+        </div>
+      </div>
+    </footer>
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let closeBtn = document.querySelector("#btn");
+      let searchBtn = document.querySelector(".bx-search");
+
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuBtnChange();//calling the function(optional)
+      });
+
+      searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+      });
+
+      // following are the code to change sidebar button(optional)
+      function menuBtnChange() {
+        if (sidebar.classList.contains("open")) {
+          closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+        } else {
+          closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+        }
+      }
+    </script>
+  </section>
+</body>
+
+</html>
