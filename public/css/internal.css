@@ -1,0 +1,104 @@
+body {
+    margin: 0%;
+    background-color: #d2d3d3;
+    font-family: "Poppins" , sans-serif;
+}
+
+.topnav {
+    background-color: #2D3032;
+    overflow: hidden;
+    width: 100%;
+
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    display: block;
+    background-color: #2D3032;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 30px;
+    text-decoration: none;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+  
+  .topnav a:nth-child(2) {
+    margin-left: 870px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #7D7F80;
+    color: white;
+  }
+  
+  /* Add an active class to highlight the current page */
+  .topnav a.active {
+    background-color: aliceblue;
+    color: black;
+  }
+  
+  /* Hide the link that should open and close the topnav on small screens */
+  .topnav .icon {
+    display: none;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    /* background-color: #2196F3; */
+    padding: 10px 100px;
+    grid-gap: 50px 50px;
+    
+  }
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    /* padding: 20px; */
+    font-size: 30px;
+    height: 300px;
+    width: 250px;
+    text-align: center;
+  }
+
+  .grid-item img {
+    height: 300px; 
+    width: 250px;
+  }
+
+  .grid-item figcaption {
+    font-size: 16px;
+  }
+
+  .grid-container :hover {
+    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
+  }
+  
+  .grid-titles {
+    padding-top: 50px;
+    padding-bottom: 0%;
+    padding-left: 100px;
+  }
+
+  .feedbacks {
+    margin-top: 100px;
+    margin-left: 100px;
+  }
+
+  table {
+
+    /* border: 1px solid black; */
+    margin-bottom: 50px;
+    border-collapse: collapse;
+  }
+
+  table th, td {
+    border: 1px solid black;
+    padding: 20px;
+  }
+
+  .manuscripts {
+    margin-top: 100px;
+    margin-left: 100px;
+  }

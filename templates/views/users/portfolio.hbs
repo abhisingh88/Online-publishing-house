@@ -14,7 +14,7 @@
 	<a href="/user/author"><button id="home-btn">Back</button></a>
 	<div class="container" id="container">
 		<div class="form-container sign-up-container">
-			<form action="#">
+			<form action="/author/selfpub" method="post" enctype="multipart/form-data">
 				<h1>Self Publishing</h1>
 				<input type="text" placeholder="Author's name" />
 				<input type="email" placeholder="Email" />
@@ -25,13 +25,13 @@
 			</form>
 		</div>
 		<div class="form-container sign-in-container">
-			<form action="#">
+			<form action="/author/stdpub" method="post" enctype="multipart/form-data">
 				<h1>Standard Publishing</h1>
-				<input type="text" placeholder="Author's name" />
-				<input type="email" placeholder="Email" />
-				<input type="text" placeholder="Contact number" />
-				<input type="book-title" placeholder="Book Title" />
-				<input type="file" id="myFile" name="filename" style="background: none;">
+				<input type="text" placeholder="Author's name" name="authorname" />
+				<input type="email" placeholder="Email" name="email" />
+				<input type="text" placeholder="Contact number" name="phone" />
+				<input type="book-title" placeholder="Book Title" name="title" />
+				<input type="file" id="myFile" name="myFile" style="background: none;">
 				<button type="submit">Submit</button>
 			</form>
 		</div>

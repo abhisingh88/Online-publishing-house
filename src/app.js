@@ -35,6 +35,7 @@ hbs.registerPartials(parials_path)
 
 // Route to the file
 app.use(router)
+// app.use("/internal", router)
 
 
 app.listen(port, () => {
