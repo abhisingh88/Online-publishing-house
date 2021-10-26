@@ -4,8 +4,11 @@ const hbs = require("hbs");
 const bcrypt = require("bcryptjs")
 
 const auth = require("../middleware/auth")
+const authintern = require("../middleware/authintern")
 
 const Register = require("../models/dbschema");
+const Internal = require("../models/internalschema");
+const BookDB = require("../models/bookschema");
 
 router.get("/", async (req, res) => {
     try {
@@ -17,16 +20,14 @@ router.get("/", async (req, res) => {
 })
 
 
-
-router.get("/dashboard", auth, async (req, res) => {
+router.get("/subs", async (req, res) => {
     try {
-        res.status(201).render("users/dashboard");
+        res.status(201).render("subs");
 
     } catch (error) {
         res.status(401).send(error)
     }
 })
-
 
 
 
@@ -40,6 +41,119 @@ router.get("/test", async (req, res) => {
     }
 })
 
+// ---------------------------------------------------Internal route------------------------------
+
+router.get("/internal", authintern, async (req, res) => {
+    try {
+        // res.redirect('internal/internal');
+        res.status(201).render("internal/internal")
+    } catch (error) {
+        res.status(401).send(error)
+    }
+})
+
+
+router.get("/internal/login", async (req, res) => {
+    try {
+        res.status(201).render("internal/login");
+
+    } catch (error) {
+        res.status(401).send(error)
+    }
+})
+
+router.post("/internal/login", async (req, res) => {
+    try {
+
+        const email = req.body.email
+        const password = req.body.password
+
+        const useremail = await Internal.findOne({ email: email })
+        // res.send(useremail)
+
+        const token = await useremail.generateAuthToken();
+
+        res.cookie("internal", token, {
+            expires: new Date(Date.now() + 600000),
+            httpOnly: true,
+            // secure:true   //works on https only
+        })
+
+
+
+
+        const isMatch = bcrypt.compare(password, useremail.password)
+
+
+        if (isMatch) {
+            // res.status(201).render("internal/internal")
+            res.redirect('/internal');
+        } else {
+            res.send("Invalid email or passwords")
+        }
+
+    } catch (error) {
+        res.status(400).send("Error occureed plz try again!!")
+    }
+})
+
+
+
+
+router.post("/internal/signup", async (req, res) => {
+    try {
+
+        const registerUser = new Internal({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+        })
+        // console.log(registerUser.username)
+        const token = await registerUser.generateAuthToken();
+
+        // console.log(token);
+        res.cookie("internal", token, {
+            expires: new Date(Date.now() + 600000),
+            httpOnly: true
+        })
+
+        console.log("saved");
+
+        const register = await registerUser.save();
+        console.log(register);
+
+        // res.status(201).render("internal/internal", { success: true })
+        res.redirect('/internal');
+    } catch (error) {
+        res.status(401).send(error)
+    }
+})
+
+
+router.get("/internal/logout", authintern, async (req, res) => {
+    try {
+
+        req.user.tokens = req.user.tokens.filter((elem) => {
+            return elem.token != req.token
+        })
+
+        res.clearCookie("internal")
+
+        console.log("Logout Successfully!!");
+
+        await req.user.save()
+        res.redirect("/internal")
+
+    } catch (error) {
+        res.status(500).send(error)
+    }
+})
+
+// ---------------------------------------------------Internal route------------------------------
+
+
+
+// ---------------------------------------------------User route------------------------------
 
 
 router.get("/logout", auth, async (req, res) => {
@@ -60,21 +174,6 @@ router.get("/logout", auth, async (req, res) => {
         res.status(500).send(error)
     }
 })
-
-
-
-
-
-
-router.get("/subs", async (req, res) => {
-    try {
-        res.status(201).render("subs");
-
-    } catch (error) {
-        res.status(401).send(error)
-    }
-})
-
 
 
 router.get("/login", async (req, res) => {
@@ -180,6 +279,16 @@ router.get("/user/preview", auth, async (req, res) => {
 })
 
 
+router.get("/dashboard", auth, async (req, res) => {
+    try {
+        res.status(201).render("users/dashboard");
+
+    } catch (error) {
+        res.status(401).send(error)
+    }
+})
+
+
 router.get("/user/subs", auth, async (req, res) => {
     try {
         res.status(201).render("users/subsauth");
@@ -225,6 +334,17 @@ router.get("/user/novel", auth, async (req, res) => {
         res.status(401).send(error)
     }
 })
+// ---------------------------------------------------User route------------------------------
+
+
+
+// ---------------------------------------------------Book route------------------------------
+
+
+
+
+// ---------------------------------------------------Book route------------------------------
+
 
 
 // router.get("/carousel", async (req, res) => {
