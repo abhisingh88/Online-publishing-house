@@ -19,10 +19,19 @@ const bookSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
-    file_id: {
+    status: {
+        type: Number,
+        // required: true
+    },
+    filename: {
         type: String,
         // required: true
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+
 
 })
 

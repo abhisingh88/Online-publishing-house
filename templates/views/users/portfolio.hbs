@@ -11,6 +11,12 @@
 </head>
 
 <body>
+	{{# if success }}
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>Success!! </strong> Your work is submitted, we'll let you know the result as soon as poosible!!
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	{{/if}}
 	<a href="/user/author"><button id="home-btn">Back</button></a>
 	<div class="container" id="container">
 		<div class="form-container sign-up-container">

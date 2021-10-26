@@ -2,6 +2,7 @@ const express = require("express")
 const router = new express.Router()
 const hbs = require("hbs");
 const bcrypt = require("bcryptjs")
+const multer = require("multer")
 
 const auth = require("../middleware/auth")
 const authintern = require("../middleware/authintern")
@@ -340,7 +341,60 @@ router.get("/user/novel", auth, async (req, res) => {
 
 // ---------------------------------------------------Book route------------------------------
 
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "public");
+    },
+    filename: (req, file, cb) => {
+        const ext = file.mimetype.split("/")[1];
+        cb(null, `files/admin-${file.fieldname}-${Date.now()}.${ext}`);
+    },
+});
 
+const multerFilter = (req, file, cb) => {
+    if (file.mimetype.split("/")[1] === "pdf") {
+        cb(null, true);
+    } else {
+        cb(new Error("Not a PDF File!!"), false);
+    }
+};
+
+const upload = multer({
+    storage: multerStorage,
+    fileFilter: multerFilter,
+});
+
+
+router.post("/author/stdpub", upload.single('myFile'), async (req, res) => {
+    try {
+        const newFile = await BookDB.create({
+            filename: req.file.filename,
+            authorname: req.body.authorname,
+            email: req.body.email,
+            contact: req.body.contact,
+            title: req.body.title,
+        });
+        // res.status(200).json({
+        //     status: "success",
+        //     message: "File created successfully!!",
+        // });
+        res.status(201).render("users/portfolio", { success: true });
+    } catch (error) {
+        res.json({
+            error,
+        });
+    }
+})
+
+
+router.post("/author/selfpub", async (req, res) => {
+    try {
+        res.status(201).render("users/novels");
+
+    } catch (error) {
+        res.status(401).send(error)
+    }
+})
 
 
 // ---------------------------------------------------Book route------------------------------
