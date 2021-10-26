@@ -374,11 +374,17 @@ router.post("/author/stdpub", upload.single('myFile'), async (req, res) => {
             contact: req.body.contact,
             title: req.body.title,
         });
+
+
         // res.status(200).json({
         //     status: "success",
         //     message: "File created successfully!!",
         // });
-        res.status(201).render("users/portfolio", { success: true });
+
+
+        res.status(201).render("users/submissionres", { success: true });
+
+
     } catch (error) {
         res.json({
             error,
