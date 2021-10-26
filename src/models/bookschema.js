@@ -12,7 +12,7 @@ const bookSchema = new mongoose.Schema({
         // unique: true
     },
     contact: {
-        type: String,
+        type: Number,
         // required: true
     },
     title: {
@@ -22,6 +22,7 @@ const bookSchema = new mongoose.Schema({
     status: {
         type: Number,
         // required: true
+        default: 0,
     },
     filename: {
         type: String,

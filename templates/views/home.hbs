@@ -196,8 +196,18 @@
         </ul>
         <ul class="box input-box">
           <li class="link_name">Help us to improve our website</li>
-          <li><input type="text" placeholder="Leave your feedback"></li>
-          <li><input type="button" value="Submit"></li>
+          <form action="/feedback" method="post">
+            {{!-- <li> --}}
+              <input type="text" placeholder="Leave your feedback" name="feedback">
+              {{!--
+            </li> --}}
+            {{!-- <li> --}}
+              <input type="submit" style="background-color: aliceblue; color: black;">
+              {{!--
+            <li><button type="submit">submit</button></li> --}}
+            {{!--
+            </li> --}}
+          </form>
         </ul>
       </div>
     </div>

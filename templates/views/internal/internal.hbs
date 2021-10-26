@@ -6,15 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/internal.css" type="text/css">
-  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <title>Internal</title>
 </head>
 
 <body>
   <div class="topnav" id="myTopnav">
     <a href="#" class="active"><b>B.</b></a>
-    <a href="/subscription/subs.html">View Feedbacks</a>
-    <a href="/subscription/subs.html">View Manuscripts</a>
-    <a href="/internal/logout">Logout</a>
+    {{!-- <a href="/subscription/subs.html">View Feedbacks</a> --}}
+    {{!-- <a href="/subscription/subs.html">View Manuscripts</a> --}}
+    <a href="/internal/logout" style="float: right;">Logout</a>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
       <i class="fa fa-bars"></i>
     </a>
@@ -30,66 +35,77 @@
       }
     }
   </script>
-  <div class="grid-titles">
-    <h2>View Orders</h2>
+
+  <div class="container m-3 px-5">
+    <button id="manuscript" class="btn btn-outline-primary px-5">Manuscripts</button>
+    <button id="feedback" class="btn btn-outline-primary px-5 ">Feedback</button>
   </div>
-  <div class="grid-container">
-    <div class="grid-item">
-      <img src="/author/2.jpeg">
-      <figcaption>Print orders - 3</figcaption>
-    </div>
-    <div class="grid-item">
-      <img src="/author/1.jpeg">
-      <figcaption>Print orders - 3</figcaption>
-    </div>
-    <div class="grid-item">
-      <img src="/author/5.jpeg">
-      <figcaption>Print orders - 3</figcaption>
-    </div>
-    <div class="grid-item">
-      <img src="/author/4.jpeg">
-      <figcaption>Print orders - 3</figcaption>
-    </div>
-    <div class="grid-item">
-      <img src="/author/6.jpeg">
-      <figcaption>Print orders - 3</figcaption>
-    </div>
-    <div class="grid-item">
-      <img src="/author/3.jpeg">
-      <figcaption>Print orders - 3</figcaption>
-    </div>
-    <div class="grid-item">
-      <img src="/author/7.jpeg">
-      <figcaption>Print orders - 3</figcaption>
-    </div>
-    <div class="grid-item">
-      <img src="/author/8.jpeg">
-      <figcaption>Print orders - 3</figcaption>
-    </div>
+  <div class="parentDiv container">
+
   </div>
-  <div class="feedbacks">
-    <h1>Customer Feedbacks</h1>
-    <table>
-      <th>Username</th><span>
-        <th>Feedback</th>
-      </span>
-      <tr>
-        <td>Abhishek</td>
-        <td>Good</td>
-      </tr>
-      <tr>
-        <td>Geetika</td>
-        <td>Bad</td>
-      </tr>
-      <tr>
-        <td>Shobhana</td>
-        <td>Worse</td>
-      </tr>
-    </table>
-  </div>
-  <div class="manuscripts">
-    <h1>Submitted Manuscripts</h1>
-  </div>
+
+
+  <script>
+    const parentDiv = document.querySelector(".parentDiv");
+    const manuscript = document.getElementById("manuscript")
+    const feedback = document.getElementById("feedback")
+    manuscript.addEventListener("click", async () => {
+      parentDiv.innerHTML = ""
+      try {
+        let result = await axios({
+          method: "GET",
+          url: "/api/getFiles",
+        });
+        let files = result.data.files;
+
+        files.forEach((file) => {
+          markup = `
+          <hr/>
+              <div class="files__entity">
+               <span><p>Book Title : ${file.title}</p></span>
+                <a href="${file.filename}" class="files__link">File</a>
+                : <span class="files__date">Submission date:- ${file.createdAt}</span>
+               <span><p>Author name : ${file.authorname}</p></span>
+               <span><p>Author email : ${file.email}</p></span>
+                <span><p>Author Contact No : ${file.contact}</p></span>
+                <buttom class="btn btn-sm btn-primary"><a href="/internal/acceptbook?id=${file._id}" style="color:white; text-decoration: none;">Accept</a></buttom>
+              </div>
+              <hr/>
+            `;
+          parentDiv.insertAdjacentHTML("beforeend", markup);
+
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    });
+    feedback.addEventListener("click", async () => {
+      parentDiv.innerHTML = "";
+      try {
+        let result = await axios({
+          method: "GET",
+          url: "/api/getFeedback",
+        });
+        let files = result.data.files;
+
+        files.forEach((file) => {
+          markup = `
+          <hr/>
+              <div class="files__entity">
+                <p>${file.feedback}</p>
+                <span class="files__date">Date created:- ${file.createdAt}</span>
+              </div>
+              <hr/>
+            `;
+          parentDiv.insertAdjacentHTML("beforeend", markup);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    })
+  </script>
+
 </body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </html>

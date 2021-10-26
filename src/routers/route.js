@@ -10,6 +10,8 @@ const authintern = require("../middleware/authintern")
 const Register = require("../models/dbschema");
 const Internal = require("../models/internalschema");
 const BookDB = require("../models/bookschema");
+const feedbackScehema = require("../models/feedbackschema");
+const PublishSchema = require("../models/publishschema");
 
 router.get("/", async (req, res) => {
     try {
@@ -24,6 +26,20 @@ router.get("/", async (req, res) => {
 router.get("/subs", async (req, res) => {
     try {
         res.status(201).render("subs");
+
+    } catch (error) {
+        res.status(401).send(error)
+    }
+})
+
+router.post("/feedback", async (req, res) => {
+    try {
+        const newFile = await feedbackScehema.create({
+            feedback: req.body.feedback,
+        });
+        console.log(newFile)
+        res.redirect("/")
+        // res.status(201).render("home");
 
     } catch (error) {
         res.status(401).send(error)
@@ -52,6 +68,58 @@ router.get("/internal", authintern, async (req, res) => {
         res.status(401).send(error)
     }
 })
+
+router.get("/internal/acceptbook", authintern, async (req, res) => {
+    try {
+        res.status(201).render("internal/acceptbook");
+
+    } catch (error) {
+        res.status(401).send(error)
+    }
+})
+
+const multerStorageimg = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "public");
+    },
+    filename: (req, file, cb) => {
+        const ext = file.mimetype.split("/")[1];
+        cb(null, `coverimg/admin-${file.fieldname}-${Date.now()}.${ext}`);
+    },
+});
+
+const multerFilterimg = (req, file, cb) => {
+    if (file.mimetype.split("/")[1] === "jpg" || file.mimetype.split("/")[1] === "jpeg") {
+        cb(null, true);
+    } else {
+        cb(new Error("Not a jpg/jpeg File!!"), false);
+    }
+};
+
+const uploadimg = multer({
+    storage: multerStorageimg,
+    fileFilter: multerFilterimg,
+});
+
+
+// router.post("/internal/acceptcontent", uploadimg.single('cover'), async (req, res) => {
+//     try {
+//         const newFile = await PublishSchema.create({
+//             imagefilename: req.file.cover,
+//             content: req.body.cover,
+//             authorid: req.body.authorid,
+//         });
+//         console.log(newFile);
+//         res.status(201).render("internal/internal");
+
+
+//     } catch (error) {
+//         res.json({
+//             error,
+//         });
+//     }
+// })
+
 
 
 router.get("/internal/login", async (req, res) => {
@@ -371,7 +439,7 @@ router.post("/author/stdpub", upload.single('myFile'), async (req, res) => {
             filename: req.file.filename,
             authorname: req.body.authorname,
             email: req.body.email,
-            contact: req.body.contact,
+            contact: req.body.phone,
             title: req.body.title,
         });
 
@@ -392,6 +460,40 @@ router.post("/author/stdpub", upload.single('myFile'), async (req, res) => {
     }
 })
 
+
+// File for internal
+router.get("/api/getFiles", async (req, res) => {
+    try {
+        const files = await BookDB.find({ status: 0 });
+        res.status(200).json({
+            status: "success",
+            files,
+        });
+        console.log(files);
+    } catch (error) {
+        res.json({
+            status: "Fail",
+            error,
+        });
+    }
+})
+
+// File for feedback
+router.get("/api/getFeedback", async (req, res) => {
+    try {
+        const files = await feedbackScehema.find({});
+        res.status(200).json({
+            status: "success",
+            files,
+        });
+        console.log(files);
+    } catch (error) {
+        res.json({
+            status: "Fail",
+            error,
+        });
+    }
+})
 
 router.post("/author/selfpub", async (req, res) => {
     try {
