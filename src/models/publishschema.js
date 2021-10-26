@@ -24,6 +24,6 @@ const publishschema = new mongoose.Schema({
 
 // Defining Collection
 
-const PublishSchema = new mongoose.model("PublishDatabase", publishschema)
+const publishDB = new mongoose.model("PublishDatabase", publishschema)
 
-module.exports = PublishSchema;
+module.exports = publishDB;

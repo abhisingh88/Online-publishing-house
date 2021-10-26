@@ -11,7 +11,7 @@ const Register = require("../models/dbschema");
 const Internal = require("../models/internalschema");
 const BookDB = require("../models/bookschema");
 const feedbackScehema = require("../models/feedbackschema");
-const PublishSchema = require("../models/publishschema");
+const publishDB = require("../models/publishschema");
 
 router.get("/", async (req, res) => {
     try {
@@ -71,7 +71,9 @@ router.get("/internal", authintern, async (req, res) => {
 
 router.get("/internal/acceptbook", authintern, async (req, res) => {
     try {
-        res.status(201).render("internal/acceptbook");
+        id = req.query.id
+        // console.log(id);
+        res.status(201).render("internal/acceptbook", { authid: id });
 
     } catch (error) {
         res.status(401).send(error)
@@ -97,28 +99,35 @@ const multerFilterimg = (req, file, cb) => {
 };
 
 const uploadimg = multer({
+    // storage: multerStorageimg,
+    // fileFilter: multerFilterimg,
     storage: multerStorageimg,
-    fileFilter: multerFilterimg,
+    fileFilter: multerFilterimg
 });
 
 
-// router.post("/internal/acceptcontent", uploadimg.single('cover'), async (req, res) => {
-//     try {
-//         const newFile = await PublishSchema.create({
-//             imagefilename: req.file.cover,
-//             content: req.body.cover,
-//             authorid: req.body.authorid,
-//         });
-//         console.log(newFile);
-//         res.status(201).render("internal/internal");
+router.post("/internal/acceptcontent", uploadimg.single('myFile'), async (req, res) => {
+    // console.log(req.body.cover);
+    try {
+        // console.log("run")
+        const newFile = await publishDB.create({
+            imagefilename: req.file.filename,
+            content: req.body.content,
+            authorid: req.body.authorid,
+        });
+        _id = req.body.authorid;
+        // console.log(newFile);
+        const updateOne = await BookDB.findByIdAndUpdate(_id, { status: 1 })
+        // console.log(updateOne);
+        res.redirect("/internal");
 
 
-//     } catch (error) {
-//         res.json({
-//             error,
-//         });
-//     }
-// })
+    } catch (error) {
+        res.json({
+            error,
+        });
+    }
+})
 
 
 
@@ -469,7 +478,7 @@ router.get("/api/getFiles", async (req, res) => {
             status: "success",
             files,
         });
-        console.log(files);
+        // console.log(files);
     } catch (error) {
         res.json({
             status: "Fail",

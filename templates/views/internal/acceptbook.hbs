@@ -55,6 +55,10 @@
             justify-content: center;
         }
     </style>
+    {{!--
+    <script>
+        console.log({{ authid }})
+    </script> --}}
 </head>
 
 <body>
@@ -98,30 +102,19 @@
             </div>
         </div>
         <br>
-        <script>
-            url = window.location.href;
-            {
-                {
-                    !--authorid = document.getElementById("authorid")
-                    id = url.searchParams.get('id');
-                    authorid.value = id;
-                    console.log(url)--
-                }
-            }
-            console.log(url)
-        </script>
-        <div class="row">
+
+        <div class="row" onload="setauthorid()">
             <div class="col-md-3 col-sm-3">
             </div>
             <div class="col-md-6 col-sm-9">
                 <div class="flex-box">
-                    <form action="/internal/acceptcontent" method="post">
+                    <form action="/internal/acceptcontent" method="post" enctype="multipart/form-data">
                         <textarea id="textarea1" class="input shadow" name="content" rows="15" cols="100"
                             placeholder="Your text here ">
                     </textarea>
                         <p class="my-1">Cover Letter here 👇</p>
-                        <input type="file" name="cover" placeholder="Submit Cover Letter">
-                        <input type="hidden" name="authorid" id="authorid">
+                        <input type="file" id="myFile" name="myFile" placeholder="Submit Cover Letter">
+                        <input type="hidden" name="authorid" value="{{authid}}">
                         <br />
                         <input type="submit" class="btn btn-primary my-2" value="Publish">
                     </form>
@@ -135,7 +128,10 @@
     <br>
     <br>
 
+
+
 </body>
+
 <script>
     function f1() {
         //function to make the text bold using DOM method
