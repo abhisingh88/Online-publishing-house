@@ -196,7 +196,7 @@
   <section class="home-section">
     <!-- <div class="text">Dashboard</div> -->
 
-    <div class="grid-titles">
+    {{!-- <div class="grid-titles">
       <h2>Non Fiction</h2>
     </div>
     <div class="grid-container">
@@ -300,6 +300,19 @@
         <div class="grid-item">14</div>
         <div class="grid-item">15</div>
         <div class="grid-item">16</div>
+      </div>
+    </div>
+    <div> --}}
+      <div class="grid-container">
+        {{#each data}}
+        {{#each this}}
+        {{#if this.imagefilename}}
+        <a href="/user/preview?id={{this._id}}">
+          <div class="grid-item"><img src="/{{this.imagefilename}}" alt="alt"></div>
+        </a>
+        {{/if}}
+        {{/each}}
+        {{/each}}
       </div>
     </div>
     <script>

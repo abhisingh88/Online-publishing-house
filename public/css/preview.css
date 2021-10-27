@@ -7,6 +7,7 @@
   background-image: url('http://wallup.net/wp-content/uploads/2016/03/10/311016-multiple_display-bamboo-forest-nature.jpg');
   background-attachment: fixed;
   background-size: cover;
+  opacity: 0.8;
 }
 
 .topnav {
@@ -53,7 +54,7 @@
 
 .preview-box {
   height: 400px;
-  width: 800px;
+  width: 1200px;
   border: transparent;
   box-shadow: 0px 3px 12px  black;
   margin: 80px;
@@ -66,7 +67,7 @@
   margin-bottom: 0%;
   background-color: black;
   opacity: 0.8;
-  color: #f2f2f2;
+  color: #ffffff;
 }
 
 .preview-box > h2 {
@@ -79,7 +80,7 @@
   margin-left: 80px;
   padding: 30px;
   height: 30px;
-  width: 800px;
+  width: 1200px;
   border: none;
   font-size: 16px;
   background-color: black;

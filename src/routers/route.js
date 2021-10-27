@@ -348,13 +348,46 @@ router.get("/user/author", auth, async (req, res) => {
 router.get("/user/preview", auth, async (req, res) => {
     try {
         bookid = req.query.id
-        console.log(bookid);
-        res.status(201).render("users/preview");
+        verif = req.query.verif
+        // console.log(bookid, "and", verif);
+        const data = await publishDB.findById({ _id: bookid }, 'content authorid');
+        const title = await BookDB.findById({ _id: data.authorid }, 'title');
+        if (Number(verif)) {
+            data.content = data.content
+            // res.redirect("/user/content?id=" + bookid + "&verif=" + verif)
+        } else {
+            data.content = data.content.slice(1, 800)
+        }
+        res.status(201).render("users/preview", { data: data, title: title, id: bookid, verif: verif });
 
     } catch (error) {
         res.status(401).send(error)
     }
 })
+
+// router.get("/user/content", auth, async (req, res) => {
+//     try {
+//         console.log("here in main content")
+//         bookid = req.query.id
+//         console.log(bookid);
+//         const data = await publishDB.findById({ _id: bookid }, 'content authorid');
+//         const title = await BookDB.findById({ _id: data.authorid }, 'title');
+//         // data.content = data.content.slice(1, 800)
+//         res.status(201).render("users/content", { data: data, title: title, id: bookid, verif: verif });
+
+//     } catch (error) {
+//         res.status(401).send(error)
+//     }
+// })
+
+// router.get("/user/middle", auth, async (req, res) => {
+//     try {
+//         bookid = req.query.id
+//         res.redirect("/user/content?id=" + bookid)
+//     } catch (error) {
+//         res.status(401).send(error)
+//     }
+// })
 
 
 router.get("/dashboard", auth, async (req, res) => {
@@ -375,6 +408,19 @@ router.get("/user/subs", auth, async (req, res) => {
         res.status(401).send(error)
     }
 })
+
+
+router.get("/user/previewsubs", auth, async (req, res) => {
+    try {
+        bookid = req.query.id
+        console.log(bookid);
+        res.status(201).render("users/previewsubs", { id: bookid });
+
+    } catch (error) {
+        res.status(401).send(error)
+    }
+})
+
 
 
 router.get("/user/mainpage", auth, async (req, res) => {
@@ -406,7 +452,9 @@ router.get("/user/conditions", auth, async (req, res) => {
 })
 router.get("/user/novel", auth, async (req, res) => {
     try {
-        res.status(201).render("users/novels");
+        const data = await publishDB.find({}, '_id authorid imagefilename');
+        // console.log(data);
+        res.status(201).render("users/novels", { data: data });
 
     } catch (error) {
         res.status(401).send(error)
