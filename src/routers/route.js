@@ -554,10 +554,28 @@ router.get("/api/getFeedback", async (req, res) => {
 
 router.post("/author/selfpub", async (req, res) => {
     try {
-        res.status(201).render("users/novels");
+        const newFile = await BookDB.create({
+            filename: req.file.filename,
+            authorname: req.body.authorname,
+            email: req.body.email,
+            contact: req.body.phone,
+            title: req.body.title,
+        });
+
+
+        // res.status(200).json({
+        //     status: "success",
+        //     message: "File created successfully!!",
+        // });
+
+
+        res.status(201).render("users/submissionres", { success: true });
+
 
     } catch (error) {
-        res.status(401).send(error)
+        res.json({
+            error,
+        });
     }
 })
 
