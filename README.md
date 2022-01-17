@@ -66,3 +66,15 @@ Start the server
 
 - [@Abhishek Singh](https://github.com/abhisingh88)
 
+# Hi, I'm Abhishek Singh! 👋
+
+
+## 🚀 About Me
+I'm a full stack developer and currently learning Machine Learning and Data science.
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://abhisingh88.github.io/me/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/abhisingh88/)
+
+
+## 🛠 Skills
+Python, Tensorflow, Scikit, Datascience, NodeJs, SQL, NoSQL, PHP, Cloud, Android, Flutter
